@@ -1,32 +1,41 @@
 #include <iostream>
+#include <string>
 #include <vector>
-
 using namespace std;
-struct pairOfTranslator{
-    std::vector<pairOfTranslator> pairs;
+const int Value=5; // Кол-во элементов в векторе
+struct wordsPair {
     string englishWord;
     string russianWord;
+};
+
+
+class pairOfTranslator{
+public:
     void create();
     void read();
     void update();
     void Delete();
+
+private:
+    std::vector<wordsPair> pairs;
+
 };
 
 void pairOfTranslator::create() {
-    pairOfTranslator pair;
+    wordsPair pair;
 
+    cout << "Write russian word and english word" << endl;
+for(int i=0;i<Value;i++) {
+    cin >> pair.russianWord;
+    cin >> pair.englishWord;
 
-    for(int i=0;i<pairs.size();i++){
-
-        cin >> russianWord;
-        cin >> englishWord;
-        pairs.push_back(pair);
-    }
+    pairs.push_back(pair);
 }
-void pairOfTranslator:: read() {
+}
+void pairOfTranslator::read() {
     string find_value;
     cin >> find_value;
-    for (int i = 0; i < pairs.size(); i++) {
+    for (int i = 0; i < Value; i++) {
         if (pairs[i].russianWord == find_value) {
             cout << pairs[i].englishWord << endl;
         }
@@ -36,111 +45,56 @@ void pairOfTranslator:: read() {
     }
 }
 void pairOfTranslator::update() {
-    pairOfTranslator pair;
 
-
-    for (int i = 0; i < pairs.size(); i++) {
-
-        cin >> russianWord;
-        cin >> englishWord;
-        pairs.push_back(pair);
-
+    string update_value;
+    string value;
+    cout<<"Write worlds to update"<<endl;
+    cin >> update_value;
+    cout<<"Enter a word that you can update to"<<endl;
+    cin>>value;
+    for (int i = 0; i < Value; i++) {
+        if (pairs[i].russianWord == update_value) {
+            pairs[i].russianWord = value;
+        } else if (pairs[i].englishWord == update_value) {
+            pairs[i].englishWord = value;
+        }
     }
 }
 void pairOfTranslator::Delete() {
-    pairs.clear();
+    string delete_value;
+    cin >> delete_value;
+    for (int i = 0; i < Value; i++) {
+        if (pairs[i].russianWord == delete_value) {
+            __gnu_cxx::__normal_iterator<wordsPair *, vector<wordsPair, allocator<wordsPair>>> pos = pairs.begin() + i;
+            pairs.erase(pos);
+        } else if (pairs[i].englishWord == delete_value) {
+            __gnu_cxx::__normal_iterator<wordsPair *, vector<wordsPair, allocator<wordsPair>>> pos = pairs.begin() + i;
+            pairs.erase(pos);
+        }
+    }
+
 }
 
 
-
-
-
-
 int main() {
-    int function=0;
-    cout<< "Hi! Choose a function:"<<endl;
-    cout<< "1)Create"<< " "<<"2)Read"<<endl;
-    cout<< "3)Update"<< " "<<"3)Delete"<<endl;
-    cin>> function;
-    if(function==1){
+    pairOfTranslator translator;
+while(true) {
+    int function = 0;
+    cout << "Choose an action:" << endl;
+    cout << "1 - Create" << " " << "2 - Read" << endl;
+    cout << "3 - Update" << " " << "4 - Delete" << endl;
+    cin >> function;
 
+    if (function == 1) {
+        translator.create();
+    } else if (function == 2) {
+        translator.read();
+    } else if (function == 3) {
+        translator.update();
+    } else if (function == 4) {
+        translator.Delete();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //1
-//    std::vector<pairOfTranslator> pairs;
-//
-//    pairOfTranslator pair;
-//    pair.russianWord = "koshka";
-//    pair.englishWord = "cat";
-//    pairs.push_back(pair);
-//    pair.russianWord = "stol";
-//    pair.englishWord = "table";
-//    pairs.push_back(pair);
-//    pair.russianWord = "okno";
-//    pair.englishWord = "window";
-//    pairs.push_back(pair);
-//
-//
-//    string find_value = "cat";
-//
-//    for(int i = 0; i < pairs.size(); i++) {
-//        if (pairs[i].russianWord == find_value or pairs[i].englishWord == find_value){
-//            cout << "found " << endl;
-//        }
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //2
-//    pairOfTranslator *pairs_arr;
-//    pairs_arr = new pairOfTranslator [10];
-//    for (int i = 0; i < 10; i++) {
-//        pairs_arr[i].englishWord = "Cat" + to_string(i);
-//        pairs_arr[i].russianWord = "Koshka" + to_string(i);
-//    }
+    else break;
+}
+    return 0;
+}

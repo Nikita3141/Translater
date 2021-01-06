@@ -1,118 +1,70 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
-#include <regex>
-#include <map>
+#include <vector>
+
 using namespace std;
-void to_lower(string& str){
-    transform(str.begin(), str.end(), str.begin(), ::tolower); // трансформация
+struct pairOfTranslator{
+    std::vector<pairOfTranslator> pairs;
+    string englishWord;
+    string russianWord;
+    void create();
+    void read();
+    void update();
+    void Delete();
+};
+
+void pairOfTranslator::create() {
+    pairOfTranslator pair;
+
+
+    for(int i=0;i<pairs.size();i++){
+
+        cin >> russianWord;
+        cin >> englishWord;
+        pairs.push_back(pair);
+    }
+}
+void pairOfTranslator:: read() {
+    string find_value;
+    cin >> find_value;
+    for (int i = 0; i < pairs.size(); i++) {
+        if (pairs[i].russianWord == find_value) {
+            cout << pairs[i].englishWord << endl;
+        }
+        else if (pairs[i].englishWord == find_value) {
+            cout << pairs[i].russianWord << endl;
+        }
+    }
+}
+void pairOfTranslator::update() {
+    pairOfTranslator pair;
+
+
+    for (int i = 0; i < pairs.size(); i++) {
+
+        cin >> russianWord;
+        cin >> englishWord;
+        pairs.push_back(pair);
+
+    }
+}
+void pairOfTranslator::Delete() {
+    pairs.clear();
 }
 
-void bot(string text)
-{
-    cout <<"Translation: " << text << endl;
-}
-string user ()
-{
-    string question;
-    cout << "[USER]:";
-    getline(cin, question);
-    to_lower(question);
-    return question;
-}
+
+
+
+
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-    int function = 0;
-    cout << "1)Translation from English to Russian" << " "<<"2)Translation from Russian to English" << endl;
-    cin >> function;
-    if (function == 1) {
-        cout << "Hello dear User, please Enter a word to translate:" << std::endl;
-        string question; // user question
-
-        map<string, string> database = {
-                {"guest ",  "гость"},
-                {"cat",     "Кот"},
-                {"disturb", "мешать"},
-                {"provide", "обеспечивать"},
-                {"woman",   "женщина"},
-                {"exit",   "Прощайте!"},
-        };
-
-        while (question != "exit") {
-
-            question = user();
-
-            bool isAnswerFound = false;
-
-
-            for (auto entry : database) {
-
-                regex pattern = regex(".*" + entry.first + ".*");
-
-                if (regex_match(question, pattern)) {
-
-                    bot(entry.second);
-
-                    isAnswerFound = true;
-
-                }
-
-            }
-
-            if (!isAnswerFound) {
-
-                bot("Sorry I do not understand");
-
-            }
-
-        }
+    int function=0;
+    cout<< "Hi! Choose a function:"<<endl;
+    cout<< "1)Create"<< " "<<"2)Read"<<endl;
+    cout<< "3)Update"<< " "<<"3)Delete"<<endl;
+    cin>> function;
+    if(function==1){
 
     }
-    else if(function==2){
-        cout << "Hello dear User, please Enter a word to translate:" << std::endl;
-        string question; // user question
-        map<string, string> database = {
-                {"гость ",  "guest"},
-                {"кот",     "cat"},
-                {"мешать", "disturb"},
-                {"Обсепечивать", "provide"},
-                {"женщина",   "woman"},
-        };
-
-        while (question != "exit") {
-
-            question = user();
-
-            bool isAnswerFound = false;
-
-
-            for (auto entry : database) {
-
-                regex pattern = regex(".*" + entry.first + ".*");
-
-                if (regex_match(question, pattern)) {
-
-                    bot(entry.second);
-
-                    isAnswerFound = true;
-
-                }
-
-            }
-
-            if (!isAnswerFound) {
-
-                bot("Sorry I do not understand");
-
-            }
-
-        }
-
-    }
-    else cout<<"enter the Function number";
-
-}
 
 
 
@@ -131,75 +83,64 @@ int main() {
 
 
 
-//class CRUD {
-//public:
-//     char *arr[5][5] = {" ", " ", " ", " ", " ",}; //
-//     char *arr1[5][5] ={" "," "," "," "," ",}; //
-//     void create(int);
-//    void read();
-//    void update();
-//    void Delete();
+
+
+    //1
+//    std::vector<pairOfTranslator> pairs;
+//
+//    pairOfTranslator pair;
+//    pair.russianWord = "koshka";
+//    pair.englishWord = "cat";
+//    pairs.push_back(pair);
+//    pair.russianWord = "stol";
+//    pair.englishWord = "table";
+//    pairs.push_back(pair);
+//    pair.russianWord = "okno";
+//    pair.englishWord = "window";
+//    pairs.push_back(pair);
 //
 //
+//    string find_value = "cat";
 //
-//};
-//
-//void CRUD::create(int i) { // cоздать
-//    if (i==1){
-//        char tmp;
-//        while(cin >> tmp) {
-//            *arr[5][5] = tmp;
+//    for(int i = 0; i < pairs.size(); i++) {
+//        if (pairs[i].russianWord == find_value or pairs[i].englishWord == find_value){
+//            cout << "found " << endl;
 //        }
-//            return;
 //    }
-//    else {
-//        char tmp1;
-//        while(cin >> tmp1) {
-//            *arr[5][5] = tmp1;
-//        }
-//            return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //2
+//    pairOfTranslator *pairs_arr;
+//    pairs_arr = new pairOfTranslator [10];
+//    for (int i = 0; i < 10; i++) {
+//        pairs_arr[i].englishWord = "Cat" + to_string(i);
+//        pairs_arr[i].russianWord = "Koshka" + to_string(i);
 //    }
-//}
-//void CRUD::read() { // считать
-//
-//}
-//void CRUD::update() { // редактировать
-//
-//}
-//void CRUD::Delete() { // Удалить
-//
-//}
-
-
-
-//    cout <<"Select the function number"<<endl;
-//    cout <<"1)Create words"<< "2)Count the words"<<endl;
-//    cout <<"3)Update any of the words"<< "4)Delete the words"<<endl;
-//    int function=0;
-//    int setlocate=0;
-//
-//    cin >> function;
-//
-//        if(function==1){
-//            cout << "1)Russian worlds"<<"2)English worlds"<<endl;
-//            cin >> setlocate;
-//            if ((setlocate==1) || (setlocate==2)){
-//                CRUD::create(setlocate);
-//            }
-//            else cout<<"The number you entered is incorrect";
-//
-//        }
-//        else if(function==2){
-//
-//        }
-//        else if(function==3){
-//
-//        }
-//        else if(function==4){
-//
-//        }
-//        else cout << "The number you entered is incorrect"<<endl;
-//
-//}
-
-

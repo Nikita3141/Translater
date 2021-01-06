@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 using namespace std;
-const int Value=5; // Кол-во элементов в векторе
+const int Value=1; // Кол-во элементов в векторе
 struct wordsPair {
     string englishWord;
     string russianWord;
@@ -33,13 +33,16 @@ for(int i=0;i<Value;i++) {
 }
 }
 void pairOfTranslator::read() {
+    if( pairs.size() == 0 ) {
+        return;
+    }
     string find_value;
     cin >> find_value;
     for (int i = 0; i < Value; i++) {
         if (pairs[i].russianWord == find_value) {
             cout << pairs[i].englishWord << endl;
         }
-        else if (pairs[i].englishWord == find_value) {
+        if (pairs[i].englishWord == find_value) {
             cout << pairs[i].russianWord << endl;
         }
     }
@@ -65,11 +68,9 @@ void pairOfTranslator::Delete() {
     cin >> delete_value;
     for (int i = 0; i < Value; i++) {
         if (pairs[i].russianWord == delete_value) {
-            __gnu_cxx::__normal_iterator<wordsPair *, vector<wordsPair, allocator<wordsPair>>> pos = pairs.begin() + i;
-            pairs.erase(pos);
+            pairs.erase(pairs.begin() + i);
         } else if (pairs[i].englishWord == delete_value) {
-            __gnu_cxx::__normal_iterator<wordsPair *, vector<wordsPair, allocator<wordsPair>>> pos = pairs.begin() + i;
-            pairs.erase(pos);
+            pairs.erase(pairs.begin() + i);
         }
     }
 
